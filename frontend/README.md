@@ -21,10 +21,19 @@ Uses `@preview/basic-resume:0.2.9` template with support for:
 
 - Personal info
 - Work experience
+- Education
 - Projects
 - Extracurriculars
 - Certificates
 - Skills
+
+## Known Issues
+
+### Typst Special Characters Not Escaped
+
+User input containing Typst special characters (`$`, `#`, `\`, `_`, `*`, `` ` ``, `@`, `<`, `>`) is not sanitized before being inserted into generated Typst code, which can cause compilation errors.
+
+**Temporary workaround**: Remove the problematic section entry and re-add it to clear the error.
 
 ## Development
 
