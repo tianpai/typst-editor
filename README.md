@@ -2,6 +2,8 @@
 
 Two independent POCs for working with Typst templates.
 
+![Typst Editor Screenshot](./assets/typst-editor-poc.png)
+
 > [!CAUTION]
 > This is just a proof of concept. For production use, consider reading the official documentation at https://myriad-dreamin.github.io/typst.ts/cookery/introduction.html
 
