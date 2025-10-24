@@ -6,6 +6,7 @@ import type {
 import type {
   PersonalInfo,
   WorkExperience,
+  Education,
   Project,
   Extracurricular,
   Certificate,
@@ -93,6 +94,24 @@ export class BasicResumeAdapter implements TemplateAdapter {
         ],
       },
       {
+        id: "education",
+        label: "Education",
+        multiple: true,
+        required: false, // Zero or more
+        fields: [
+          { key: "institution", label: "Institution", type: "text" },
+          { key: "location", label: "Location", type: "text" },
+          { key: "degree", label: "Degree", type: "text" },
+          { key: "startDate", label: "Start Date", type: "date" },
+          { key: "endDate", label: "End Date", type: "date" },
+          {
+            key: "bullet_points",
+            label: "Achievements/Coursework",
+            type: "text-array",
+          },
+        ],
+      },
+      {
         id: "projects",
         label: "Projects",
         multiple: true,
@@ -158,6 +177,7 @@ export class BasicResumeAdapter implements TemplateAdapter {
     const defaults: BasicResumeData = {
       personalInfo: defaultPersonalInfo,
       workExperience: [],
+      education: [],
       projects: [],
       extracurriculars: [],
       certificates: [],
@@ -170,6 +190,7 @@ export class BasicResumeAdapter implements TemplateAdapter {
     const typedData = data as BasicResumeData;
     const personalInfo = typedData.personalInfo;
     const workExperience = typedData.workExperience;
+    const education = typedData.education;
     const projects = typedData.projects;
     const extracurriculars = typedData.extracurriculars;
     const certificates = typedData.certificates;
@@ -183,6 +204,13 @@ export class BasicResumeAdapter implements TemplateAdapter {
       output += "\n\n== Work Experience\n";
       workExperience.forEach((exp) => {
         output += "\n" + this.generateWorkEntry(exp);
+      });
+    }
+
+    if (education && education.length > 0) {
+      output += "\n\n== Education\n";
+      education.forEach((edu) => {
+        output += "\n" + this.generateEducationEntry(edu);
       });
     }
 
@@ -254,6 +282,21 @@ export class BasicResumeAdapter implements TemplateAdapter {
   dates: dates-helper(start-date: "${workExperience.startDate}", end-date: "${workExperience.endDate}"),
 )
 ${workExperience.bullet_points.map((bullet) => `- ${bullet}`).join("\n")}`;
+  }
+
+  generateEducationEntry(education: Education): string {
+    const bulletPoints =
+      education.bullet_points.length > 0
+        ? "\n" +
+          education.bullet_points.map((bullet) => `- ${bullet}`).join("\n")
+        : "";
+
+    return `#edu(
+  institution: "${education.institution}",
+  location: "${education.location}",
+  dates: dates-helper(start-date: "${education.startDate}", end-date: "${education.endDate}"),
+  degree: "${education.degree}",
+)${bulletPoints}`;
   }
 
   generateProjectEntry(project: Project): string {

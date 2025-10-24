@@ -1,4 +1,10 @@
-import type { PersonalInfo, WorkExperience } from "../../template.types";
+import type {
+  PersonalInfo,
+  WorkExperience,
+  Education,
+  Project,
+  Skill,
+} from "../../template.types";
 
 /**
  * Default values for the basic-resume template.
@@ -26,4 +32,27 @@ export const defaultWorkExperience: WorkExperience = {
   startDate: "",
   endDate: "",
   bullet_points: [],
+};
+
+export const defaultEducation: Education = {
+  institution: "",
+  location: "",
+  degree: "",
+  startDate: "",
+  endDate: "",
+  bullet_points: [],
+};
+
+export const defaultProject: Project = {
+  name: "",
+  role: "",
+  startDate: "",
+  endDate: "",
+  url: "",
+  bullet_points: [],
+};
+
+export const defaultSkill: Skill = {
+  category: "",
+  items: [],
 };

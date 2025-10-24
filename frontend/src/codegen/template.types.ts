@@ -13,6 +13,15 @@ export interface WorkExperience extends SectionEntry {
   bullet_points: string[];
 }
 
+export interface Education extends SectionEntry {
+  institution: string;
+  location: string;
+  degree: string;
+  startDate: string;
+  endDate: string;
+  bullet_points: string[];
+}
+
 export interface ImportStatement {
   path: string;
   version: string;
@@ -71,6 +80,7 @@ export interface Skill extends SectionEntry {
 export interface BasicResumeData extends TemplateData {
   personalInfo: PersonalInfo;
   workExperience: WorkExperience[];
+  education: Education[];
   projects: Project[];
   extracurriculars: Extracurricular[];
   certificates: Certificate[];
